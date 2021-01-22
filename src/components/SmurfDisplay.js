@@ -1,14 +1,36 @@
-import React from 'react';
+import React from "react";
+import {connect} from 'react-redux';
+import Smurf from './Smurf';
 
 export class SmurfDisplay extends React.Component {
-    render() {
-        return(<div>
-            
-        </div>)
+    constructor(props) {
+        super()
+        console.log('this is props in smurfDis',props)
     }
+  render() {
+    return this.props.appLoading ? <div>Smurfs are loading</div> : 
+    <div>
+        
+        {this.props.smurfs.map(ele =>(
+            <Smurf
+            name={ele.name}
+            position={ele.position}
+            nickname={ele.nickname}
+            description={ele.description}
+            />
+        ))}
+    </div>;
+  }
 }
-
-export default SmurfDisplay;
+const mapStateToProps = (state) => {
+    // console.log(state)
+  return {
+    smurfs: state.smurfs,
+    appLoading: state.appLoading,
+    error: state.error,
+  };
+};
+export default connect(mapStateToProps)(SmurfDisplay);
 
 //Task List:
 //1. Import in all needed components and library methods.

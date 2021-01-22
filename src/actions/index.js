@@ -1,5 +1,22 @@
-import axios from 'axios';
 
+import axios from 'axios';
+export const FETCH_SMURF = "FETCH_SMURF";
+export const ADD_SMURF_START = "ADD_SMURF_START";
+export const ADD_SMURF = "ADD_SMURF";
+export const ERROR = "ERROR";
+
+export const addSmurf = (value) => (dispatch) => {
+    dispatch({type: ADD_SMURF_START});
+    axios.post(`/smurfs`, value)// I changed the server to localhost 3000 in the server folder because it wasnt working on 3333. I don't know why it was appending the endpoint as what ever was in the string but it is and that is why the string is /smurfs
+    .then((res)=>{
+        dispatch({type:ADD_SMURF,payload:res.data})
+        console.log(res);
+    })
+    .catch((err)=> {
+        dispatch({type:ERROR, payload:err.message});
+        // console.log(err);
+    })
+}
 //Task List:
 //1. Add fetch smurfs action: 
 //              - fetch and return initial list of smurfs
