@@ -33,14 +33,14 @@ const sendUserError = (msg, ctx, res) => {
 };
 
 export const handlers = [
-    rest.get('http://localhost:3333/smurfs', (req, res, ctx) => {
+    rest.get('http://localhost:3000/smurfs', (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json(smurfs)
       )
     }),
 
-    rest.post('http://localhost:3333/smurfs', (req, res, ctx) => {
+    rest.post('http://localhost:3000/smurfs', (req, res, ctx) => {
       // console.log(req.body);
       const { name, position, nickname, description } = req.body;
       const newSmurf = { name, position, nickname, description, id: Date.now() };
@@ -73,7 +73,7 @@ export const handlers = [
       )
     }),
 
-    rest.put('http://localhost:3333/smurfs/:id', (req, res, ctx) => {
+    rest.put('http://localhost:3000/smurfs/:id', (req, res, ctx) => {
       const { id } = req.params;
       const { name, age, height } = req.body;
       const findSmurfById = smurf => {
@@ -94,7 +94,7 @@ export const handlers = [
       }
     }),
 
-    rest.delete('http://localhost:3333/smurfs/:id', (req, res, ctx) => {
+    rest.delete('http://localhost:3000/smurfs/:id', (req, res, ctx) => {
       const { id } = req.params;
       const foundSmurf = smurfs.find(smurf => smurf.id === id);
     
